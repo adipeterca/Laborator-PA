@@ -34,5 +34,9 @@ public class Main {
         problemTP.addCost(S3, D3, 8);
 
         problemTP.printMatrix();
+
+        Solution solution = new Solution(problemTP, 3, 3);
+        solution.solve();
+        solution.printResult();
     }
 }

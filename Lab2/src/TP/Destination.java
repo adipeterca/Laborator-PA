@@ -1,5 +1,10 @@
 package TP;
 
+/**
+ * A class representing a destination in the Transportation Problem.
+ * @author Adrian Peterca
+ * @version 1.0
+ */
 public class Destination {
     private String name;
     private Integer demand;
@@ -14,7 +19,11 @@ public class Destination {
         return getName();
     }
 
-    // Compares both the name of the destination and the demand.
+    /**
+     * Compares the current Destination object with the one given as parameter (if it is of the same type).
+     * @param obj the given parameter
+     * @return true if the objects are equal (both the demand and the name are the same), false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Destination)) {

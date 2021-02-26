@@ -2,6 +2,10 @@ package TP;
 
 import java.util.*;
 
+/**
+ * A class representing the cost from a Source object to a Destination object.
+ * Used in the Transportation problem.
+ */
 public class Cost {
     Source from;
     Destination to;

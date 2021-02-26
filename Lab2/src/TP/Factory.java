@@ -2,8 +2,11 @@ package TP;
 
 import java.util.*;
 
-
-public class Factory extends Source {
+/**
+ * A class extending the abstract class Source. It represents a Factory object,
+ * along with its constructor.
+ */
+public final class Factory extends Source {
 
     public Factory(String name, int supply) {
         setName(name);
