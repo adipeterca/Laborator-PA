@@ -29,6 +29,10 @@ public class City {
         return this.locations.get(index);
     }
 
+    public int getIndexOfLocation(Location location) {
+        return this.locations.indexOf(location);
+    }
+
     public void addLocation(Location location) {
         this.locations.add(location);
     }

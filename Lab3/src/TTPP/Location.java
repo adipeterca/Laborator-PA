@@ -69,6 +69,13 @@ public abstract class Location {
         return this.travelCost;
     }
 
+    public Integer getTravelCostTo(Location location) {
+        Integer temp = this.travelCost.get(location);
+        if (temp == null)
+            return -1;
+        return  temp;
+    }
+
     public String getName() {
         return this.name;
     }

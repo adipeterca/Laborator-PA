@@ -45,11 +45,20 @@ public class Main {
         museumB.addCost(museumA, 20);
         churchA.addCost(churchB, 30);
         churchA.addCost(restaurant, 10);
-        churchB.addCost(churchA, 10);
+        churchB.addCost(churchA, 30);
         churchB.addCost(restaurant, 20);
 
 
         iasi.displayVisitableAndNotPayable();
 
+        TravelPlan TP = new TravelPlan(iasi);
+        TP.addPreferenceForLocation(hotel);
+        TP.addPreferenceForLocation(museumA);
+        TP.addPreferenceForLocation(museumB);
+        TP.addPreferenceForLocation(churchA);
+        TP.addPreferenceForLocation(churchB);
+        TP.addPreferenceForLocation(restaurant);
+
+        System.out.println("\nShortest distance between hotel and restaurant " + TP.getShortestPathBetween(hotel, restaurant));
     }
 }
