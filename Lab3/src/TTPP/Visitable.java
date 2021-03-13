@@ -20,7 +20,7 @@ public interface Visitable {
     }
 
     static Duration getDuration(Visitable location) {
-        return Duration.between(location.getClosingHours(), location.getClosingHours());
+        return Duration.between(location.getOpeningHours(), location.getClosingHours());
     }
 
 }
