@@ -12,7 +12,8 @@ public class Student {
      * The head of the list is the school with the top priority, while the last element of the least is the school with the least priority.
      * Schools must be added in order of their importance.
      */
-    List<String> preferences;
+    List<School> preferences;
+    int score;
 
     public Student(String name) {
         if (name == null) {
@@ -27,15 +28,28 @@ public class Student {
         return this.name;
     }
 
-    public void addSchoolPreference(String school) {
+    public void addSchoolPreference(School school) {
         this.preferences.add(school);
     }
 
-    public int getPreferenceForSchool(String school) {
+    public int getPreferenceForSchool(School school) {
         return this.preferences.indexOf(school);
     }
 
-    public List<String> getPreferences() {
+    public List<School> getPreferences() {
         return this.preferences;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }

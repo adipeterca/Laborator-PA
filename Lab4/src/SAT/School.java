@@ -18,7 +18,7 @@ public class School implements Comparable<School>{
     /**
      * The preferences for different students
      */
-    List<String> preferences;
+    List<Student> preferences;
 
     public School (String name, int capacity) {
         if (name == null) {
@@ -39,6 +39,10 @@ public class School implements Comparable<School>{
         return this.name;
     }
 
+    public boolean isSpaceAvailable() {
+        return this.size > 0;
+    }
+
     public void occupyPlace() {
         if (this.size == 0) {
             System.out.println("No more places available at " + this.name + "!");
@@ -47,11 +51,11 @@ public class School implements Comparable<School>{
         this.size--;
     }
 
-    public void addStudentPreference(String name) {
+    public void addStudentPreference(Student name) {
         this.preferences.add(name);
     }
 
-    public List<String> getPreferences() {
+    public List<Student> getPreferences() {
         return this.preferences;
     }
 
@@ -62,5 +66,10 @@ public class School implements Comparable<School>{
      */
     public int compareTo(School s1) {
         return this.name.compareTo(s1.getName());
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }
