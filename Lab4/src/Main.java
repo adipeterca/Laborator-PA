@@ -125,7 +125,6 @@ public class Main {
         Stream<Student> streamOfStudents = Stream.of(s0, s1, s2, s3);
         Stream<School> streamOfSchools = Stream.of(h0, h1, h2);
 
-
         List<School> targetSchools = Arrays.asList(h0, h2);
         System.out.println("School target list: " + targetSchools);
         System.out.println("students who want to get into the above mentioned schools: ");
