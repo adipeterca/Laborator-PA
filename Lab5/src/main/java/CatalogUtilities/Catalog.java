@@ -9,7 +9,7 @@ import Items.*;
 
 /**
  * A Catalog class used to classify items.
- * It has a path and an itemList.
+ * It has a path (where it can be found and where also it is saved) and an itemList.
  * The itemList can store any class that extends the abstract class Item.
  */
 public class Catalog implements Serializable {
