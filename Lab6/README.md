@@ -12,3 +12,8 @@ Classes I have implemented are:
     <dt>ControlPanel</dt>
     <dd>Contains buttons for saving, loading, reseting and exiting the application.</dd>
 </dl>
+
+<h2>Second commit - added optinal part</h2>
+I have added a retainer mode (also a button for undoing shapes).
+I have added support for drawing multiple shapes (from a forth panel implemented in the class ShapePanel, you can choose which shape you want to draw: a regular polygon, a bowtie, a snowflake or to just free draw). All shapes extends the Polygon abstract class and implement the MyShape interface. Besides this, the ConfigPanel adapts accordingly (for example, if you choose the free drawing mode, it only displays the color selecter and the size selecter).
+The free drawing is implemented using a MouseMotionActionListener.
