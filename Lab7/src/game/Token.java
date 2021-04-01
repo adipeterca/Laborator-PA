@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 /**
  * Class representing a token from the game. Each token is must have:
