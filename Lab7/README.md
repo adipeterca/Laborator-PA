@@ -12,3 +12,12 @@ For the compulsory part, I have done the following:
     <li>added a simple console interface for setting up the game (number of players, number of tokens, the minimum and maximum score for a token, etc)</li>
     <li>in the Main class, there are two static functions: <em>setupGame</em> and <em>startGame</em>, each doing a specific task.</li>
 </ul>
+
+For the optional part, I have done the following:
+<ul>
+    <li>the class Player was made abstract and two other classes were added: ComputerPlayer and HumanPlayer. The ComputerPlayer is a bot, while the HumanPlayer reads input from keyboard.</li>
+    <li>a Timekeeper class, which keeps track of time for the game and stops it if the time allocated reaches 0</li>
+    <li>a GameShell class, which mainly runs the game with different configurations: human vs computer or computer only.</li>
+    <li>besides those classes, I have implemented a <em>wait-notify</em> approach for the game. Each player must wait for their turn!</li>
+    <li>also, I have added the ability to calculate a score based on the tokens the respective player had selected.</li>
+</ul>

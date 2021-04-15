@@ -2,7 +2,7 @@ package game;
 
 import java.util.*;
 
-public final class GameManager {
+public final class GameManager implements Runnable {
 
     private final int numberOfTokens;
     private final int n;
@@ -12,6 +12,10 @@ public final class GameManager {
     private final List<Player> playerList;
 
     boolean isGameFinished;
+
+    private boolean boardIsOccupied = false;
+
+    boolean timeUp = false;
 
     public GameManager(int numberOfTokens, int n, double minScore, double maxScore) {
         this.numberOfTokens = numberOfTokens;
@@ -23,7 +27,12 @@ public final class GameManager {
         this.playerList = new LinkedList<>();
     }
 
-    public void start() {
+    @Override
+    public void run() {
+        startGame();
+    }
+
+    public void startGame() {
         createTable();
 
         System.out.println("----------------- Game started! -----------------");
@@ -39,19 +48,41 @@ public final class GameManager {
             thread.start();
         }
 
-        while (!isGameFinished) {
+        while (!isGameFinished && !timeUp) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+
+        if (!timeUp) {
+            while (boardIsOccupied) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else {
+            System.out.println("Time's up!");
+        }
+
+
         System.out.println("----------------------------------------------\n\n");
 
         System.out.println("------------------- Scores -------------------");
+
+        // Order the players according to their scores.
+        playerList.sort((o1, o2) -> (int)(o2.getScore() - o1.getScore()));
+
+
         // Display the scores
-        for (Player p : playerList) {
-            p.printScore();
+        System.out.println("Hurray! " + playerList.get(0).getName() + " has won the game with a score of " +  playerList.get(0).getScore() + "!");
+
+        for (int i = 1; i < playerList.size(); i++) {
+            playerList.get(i).printScore();
         }
         System.out.println("----------------------------------------------\n\n");
     }
@@ -103,6 +134,34 @@ public final class GameManager {
         return null;
     }
 
+    public void displayAvailableTokens() {
+        System.out.println("----------------- Game table -----------------");
+        for (int i = 0; i < numberOfTokens; i++) {
+            if (gameTable[i].isAvailable()) {
+                System.out.print("Index " + i + " : ");
+                System.out.println(gameTable[i]);
+            }
+        }
+        System.out.println("----------------------------------------------\n\n");
+    }
+
+    public Token getTokenAtIndex(int index) {
+        if (availableTokens == 0) {
+            // Stop the game and print the score
+            isGameFinished = true;
+            return null;
+        }
+        Token t;
+        if (gameTable[index].isAvailable()) {
+            t = gameTable[index];
+            availableTokens--;
+            t.markAsUnavailable();
+        }
+        else
+            t = null;
+        return t;
+    }
+
     public boolean isGameFinished() {
         return isGameFinished;
     }
@@ -113,5 +172,17 @@ public final class GameManager {
             System.out.println(t);
         }
         System.out.println("----------------------------------------------\n\n");
+    }
+
+    public boolean isBoardIsOccupied() {
+        return boardIsOccupied;
+    }
+
+    public void occupyBoard() {
+        this.boardIsOccupied = true;
+    }
+
+    public void releaseBoard() {
+        this.boardIsOccupied = false;
     }
 }
