@@ -1,42 +1,45 @@
-package compulsory;
+package database.daos;
 
-import java.io.IOException;
+import database.connections.MyDatabaseConn;
+import database.entities.Genre;
+
 import java.sql.*;
 
-public class GenresDao {
+public class GenreDao {
 
     private final PreparedStatement getByIdStmt;
     private final PreparedStatement insertStmt;
     private final PreparedStatement deleteAllStmt;
 
-    public GenresDao(Connection connection) throws SQLException {
+    public GenreDao() throws SQLException {
+        Connection connection = MyDatabaseConn.getInstance().getConnection();
         getByIdStmt = connection.prepareStatement("select * from genres where id = ?");
         insertStmt = connection.prepareStatement("insert into genres values (?, ?)");
         deleteAllStmt = connection.prepareStatement("delete from genres");
     }
 
-    public Genres getById(int id) throws SQLException {
+    public Genre getById(int id) throws SQLException {
         getByIdStmt.setInt(1, id);
 
         ResultSet result = getByIdStmt.executeQuery();
 
-        Genres returnGenres = null;
+        Genre returnGenre = null;
         while (result.next()) {
-            returnGenres = new Genres();
-            returnGenres.setId(result.getInt(1));
-            returnGenres.setName(result.getString(2));
+            returnGenre = new Genre();
+            returnGenre.setId(result.getInt(1));
+            returnGenre.setName(result.getString(2));
         }
-        return returnGenres;
+        return returnGenre;
     }
 
-    public boolean insert(Genres genres) throws SQLException {
-        if (genres == null) {
+    public boolean insert(Genre genre) throws SQLException {
+        if (genre == null) {
             System.out.println("Cannot insert a null genre!");
             return false;
         }
 
-        insertStmt.setInt(1, genres.getId());
-        insertStmt.setString(2, genres.getName());
+        insertStmt.setInt(1, genre.getId());
+        insertStmt.setString(2, genre.getName());
 
         return insertStmt.execute();
     }

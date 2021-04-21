@@ -1,4 +1,7 @@
-package compulsory;
+package database.daos;
+
+import database.connections.MyDatabaseConn;
+import database.entities.Movie;
 
 import java.sql.*;
 
@@ -9,7 +12,8 @@ public class MovieDao {
     private final PreparedStatement deleteAllStmt;
 
 
-    public MovieDao(Connection connection) throws SQLException {
+    public MovieDao() throws SQLException {
+        Connection connection = MyDatabaseConn.getInstance().getConnection();
         getByIdStmt = connection.prepareStatement("select * from movies where id = ?");
         insertStmt = connection.prepareStatement("insert into movies values (?, ?, ?, ?, ?)");
         deleteAllStmt = connection.prepareStatement("delete from movies");

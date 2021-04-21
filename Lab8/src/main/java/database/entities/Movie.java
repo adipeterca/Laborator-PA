@@ -1,4 +1,4 @@
-package compulsory;
+package database.entities;
 
 import java.sql.Date;
 import java.util.Objects;
