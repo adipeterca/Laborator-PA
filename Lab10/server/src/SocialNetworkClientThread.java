@@ -16,9 +16,16 @@ public class SocialNetworkClientThread extends Thread{
         try {
             // Read the information coming into the socket from the client
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter output = new PrintWriter(socket.getOutputStream());
 
             // Read the request and send a response UNTIL THE CLIENT CLOSES THE CONNECTION
             do {
+                String request = input.readLine();
+                // Logica serverului
+                String response = request + " hello word!";
+                output.println(response);
+                output.flush();
+
                 sendResponse();
             } while (!socket.isClosed());
 
@@ -77,7 +84,9 @@ public class SocialNetworkClientThread extends Thread{
             case "stop" -> {
                 output.println("server-stop");
                 output.close();
+                output.flush();
                 System.out.println("Connection terminated!");
+                System.exit(0);
             }
             default -> {
                 output.println("bad-request");
